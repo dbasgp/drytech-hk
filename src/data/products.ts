@@ -49,7 +49,7 @@ export const contact = {
   whatsappDisplay: "+852 5488 0850",
   hotline: "+852 5488 0850",
   email: "info@drytech.hk",
-  calculatorUrl: "https://drytech-sg-calculator-797933795168.us-west1.run.app",
+  calculatorUrl: "https://drytech-hk-calculator-181407950164.us-west1.run.app",
 };
 
 // Helper to build a WhatsApp deep link from any message
