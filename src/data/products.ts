@@ -38,7 +38,7 @@ export const brandHighlights = [
 export const contact = {
   whatsapp: "85254880850",
   whatsappDisplay: "+852 5488 0850",
-  hotline: "+852 5488 0850",
+  hotline: "+852 2121 0968",
   email: "info@drytech.hk",
   calculatorUrl: "https://drytech-hk-calculator-181407950164.us-west1.run.app",
 };
