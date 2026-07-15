@@ -12,7 +12,43 @@ const {
   ogImage = '/og-image.jpg',
 } = Astro.props;
 
-const canonicalUrl = new URL(Astro.url.pathname, 'https://drytech.hk').href;
+const site = 'https://www.drytech.hk';
+const canonicalUrl = new URL(Astro.url.pathname, site).href;
+const isHome = Astro.url.pathname === '/';
+
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${site}/#organization`,
+  name: 'DryTech.hk',
+  url: `${site}/`,
+  logo: `${site}/images/drytech-logo.png`,
+  email: 'info@drytech.hk',
+  telephone: '+852 2121 0968',
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: '+852 2121 0968',
+    contactType: 'sales',
+    areaServed: 'HK',
+    availableLanguage: ['English', 'Cantonese'],
+  },
+};
+
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': `${site}/#localbusiness`,
+  name: 'DryTech.hk — Ceiling Dehumidifier Specialist',
+  url: `${site}/`,
+  image: `${site}/og-image.jpg`,
+  telephone: '+852 2121 0968',
+  email: 'info@drytech.hk',
+  priceRange: '$$',
+  areaServed: 'HK',
+  description:
+    'Ultra-thin ceiling dehumidifiers for Hong Kong homes and businesses. Whole-space humidity control from 20 to 400 L/day.',
+  parentOrganization: { '@type': 'Organization', name: 'DBA Electric', url: 'https://dba.hk' },
+};
 ---
 
 <!doctype html>
@@ -29,15 +65,19 @@ const canonicalUrl = new URL(Astro.url.pathname, 'https://drytech.hk').href;
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={`https://drytech.hk${ogImage}`} />
+    <meta property="og:image" content={`${site}${ogImage}`} />
     <meta property="og:site_name" content="DryTech.hk" />
-    <meta property="og:locale" content="en_SG" />
+    <meta property="og:locale" content="en_HK" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={`https://drytech.hk${ogImage}`} />
+    <meta name="twitter:image" content={`${site}${ogImage}`} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+    {isHome && <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />}
+    <slot name="head" />
 
     <title>{title}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
